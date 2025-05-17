@@ -6,7 +6,7 @@
 
 - [x] [tutorial-01](https://learnopengl.com/Getting-started/Hello-Triangle): Hello Triangle
 - [x] [tutorial-02](https://learnopengl.com/Getting-started/Textures): Textures
-- [ ] [tutorial-03](https://learnopengl.com/Getting-started/Coordinate-Systems): Coordinate Systems
+- [x] [tutorial-03](https://learnopengl.com/Getting-started/Coordinate-Systems): Coordinate Systems
 - [ ] [tutorial-04](https://learnopengl.com/Getting-started/Camera): Camera
 
 ### Lighting
