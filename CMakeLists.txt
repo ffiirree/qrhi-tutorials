@@ -22,3 +22,4 @@ if (WIN32)
 endif ()
 
 add_subdirectory(tutorial-01)
+add_subdirectory(tutorial-02)
