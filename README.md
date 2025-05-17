@@ -17,7 +17,7 @@
 
 ### Model Loading
 
-- [ ] [tutorial-08](https://learnopengl.com/Model-Loading/Assimp): Loading
+- [x] [tutorial-08](https://learnopengl.com/Model-Loading/Assimp): Loading
 
 ## Usage
 
@@ -32,8 +32,9 @@ cmake --build . --config Release
 ### Environment
 
 - `C++` :  `C++20`
-- `Qt` : `6.8.x`
+- `Qt` : `>= 6.8.0`
 - `CMake` : `>= 3.22`
+- `Assimp` : `>= 5.2.0`
 
 ## References
 

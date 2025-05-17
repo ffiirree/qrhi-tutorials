@@ -146,9 +146,15 @@ void RhiWidget::render(QRhiCommandBuffer *cb)
 
     cb->endPass();
 }
+
+void RhiWidget::mousePressEvent(QMouseEvent *event)
+{
+    last_pos_ = QVector2D(event->position());
+    QWidget::mousePressEvent(event);
+}
+
 void RhiWidget::mouseMoveEvent(QMouseEvent *event)
 {
-
     const auto diff = QVector2D(event->position()) - last_pos_;
     last_pos_       = QVector2D(event->position());
 

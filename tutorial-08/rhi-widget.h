@@ -1,6 +1,8 @@
 #ifndef RHI_WIDGET_H
 #define RHI_WIDGET_H
 
+#include "model.h"
+
 #include <QRhiWidget>
 #include <rhi/qrhi.h>
 
@@ -19,25 +21,19 @@ protected:
     void mousePressEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
 
+    void dragEnterEvent(QDragEnterEvent *event) override;
+    void dropEvent(QDropEvent *event) override;
+
 private:
     QRhi *rhi_{};
 
-    std::unique_ptr<QRhiGraphicsPipeline>       pipeline_{};
-    std::unique_ptr<QRhiBuffer>                 vbuf_{};
-    std::unique_ptr<QRhiBuffer>                 ubuf_{};
-    std::unique_ptr<QRhiSampler>                sampler_{};
-    std::unique_ptr<QRhiShaderResourceBindings> srb_{};
-    std::unique_ptr<QRhiTexture>                texture_{};
-
-    QMatrix4x4 model_{};
-    QMatrix4x4 view_{};
-    QMatrix4x4 projection_{};
+    QMatrix4x4  mvp_{};
 
     // mouse
     QVector2D   last_pos_{};
     QQuaternion rotation_{};
 
-    QImage cover_{};
+    Model model_{};
 };
 
 #endif //! RHI_WIDGET_H
