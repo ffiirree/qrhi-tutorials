@@ -1,7 +1,7 @@
 #ifndef RHI_WIDGET_H
 #define RHI_WIDGET_H
 
-#include "model.h"
+#include "render-item.h"
 
 #include <QRhiWidget>
 #include <rhi/qrhi.h>
@@ -27,13 +27,13 @@ protected:
 private:
     QRhi *rhi_{};
 
-    QMatrix4x4  mvp_{};
+    QMatrix4x4 mvp_{};
 
     // mouse
     QVector2D   last_pos_{};
     QQuaternion rotation_{};
 
-    Model model_{};
+    std::vector<std::unique_ptr<RenderItem>> items_{};
 };
 
 #endif //! RHI_WIDGET_H
