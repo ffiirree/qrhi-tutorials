@@ -20,6 +20,7 @@ public:
 protected:
     void mousePressEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
+    void wheelEvent(QWheelEvent *event) override;
 
     void dragEnterEvent(QDragEnterEvent *event) override;
     void dropEvent(QDropEvent *event) override;
@@ -32,6 +33,7 @@ private:
     // mouse
     QVector2D   last_pos_{};
     QQuaternion rotation_{};
+    QVector3D   camera_pos_{ 0.0f, 0.0f, -8.0f };
 
     std::vector<std::unique_ptr<RenderItem>> items_{};
 };

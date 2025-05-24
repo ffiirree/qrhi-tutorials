@@ -6,7 +6,11 @@
 #include <QMimeData>
 #include <QMouseEvent>
 
-RhiWidget::RhiWidget() { setAcceptDrops(true); }
+RhiWidget::RhiWidget()
+{
+    setAcceptDrops(true);
+    setSampleCount(4);
+}
 
 void RhiWidget::initialize(QRhiCommandBuffer *cb)
 {
@@ -22,7 +26,7 @@ void RhiWidget::render(QRhiCommandBuffer *cb)
 
     mvp_.setToIdentity();
     mvp_.perspective(45.0f, rtsz.width() / (float)rtsz.height(), 0.01f, 1000.0f);
-    mvp_.translate(0, 0, -8.0);
+    mvp_.translate(camera_pos_);
     mvp_.rotate(rotation_);
 
     for (auto& item : items_) {
@@ -56,6 +60,15 @@ void RhiWidget::mouseMoveEvent(QMouseEvent *event)
     update();
 
     QWidget::mouseMoveEvent(event);
+}
+
+void RhiWidget::wheelEvent(QWheelEvent *event)
+{
+    camera_pos_ += { 0, 0, event->angleDelta().y() / 12.0f };
+
+    update();
+
+    QWidget::wheelEvent(event);
 }
 
 void RhiWidget::dragEnterEvent(QDragEnterEvent *event)

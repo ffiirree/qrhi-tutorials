@@ -17,7 +17,10 @@ bool Model::load(const QString& resource)
     const auto       scene =
         importer.ReadFile(resource.toStdString(),
                           aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_CalcTangentSpace);
-    if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) return false;
+    if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
+        qDebug() << importer.GetErrorString();
+        return false;
+    }
 
     meshes_.clear();
     textures_.clear();
