@@ -56,7 +56,7 @@ QShader LoadShader(const QString& name)
     return f.open(QIODevice::ReadOnly) ? QShader::fromSerialized(f.readAll()) : QShader();
 }
 
-RhiWidget::RhiWidget() { cover_.load(":/images/cover.png"); }
+RhiWidget::RhiWidget() { setSampleCount(4); }
 
 void RhiWidget::initialize(QRhiCommandBuffer *cb)
 {
@@ -69,23 +69,14 @@ void RhiWidget::initialize(QRhiCommandBuffer *cb)
         vbuf_.reset(rhi_->newBuffer(QRhiBuffer::Immutable, QRhiBuffer::VertexBuffer, sizeof(vertices)));
         vbuf_->create();
 
-        ubuf_.reset(rhi_->newBuffer(QRhiBuffer::Dynamic, QRhiBuffer::UniformBuffer, 64));
+        ubuf_.reset(rhi_->newBuffer(QRhiBuffer::Dynamic, QRhiBuffer::UniformBuffer, 64 + 12));
         ubuf_->create();
-
-        sampler_.reset(rhi_->newSampler(QRhiSampler::Linear, QRhiSampler::Linear, QRhiSampler::None,
-                                        QRhiSampler::ClampToEdge, QRhiSampler::ClampToEdge));
-        sampler_->create();
-
-        texture_.reset(rhi_->newTexture(QRhiTexture::RGBA8, cover_.size()));
-        texture_->create();
 
         srb_.reset(rhi_->newShaderResourceBindings());
         srb_->setBindings({
             QRhiShaderResourceBinding::uniformBuffer(
                 0, QRhiShaderResourceBinding::VertexStage | QRhiShaderResourceBinding::FragmentStage,
                 ubuf_.get()),
-            QRhiShaderResourceBinding::sampledTexture(1, QRhiShaderResourceBinding::FragmentStage,
-                                                      texture_.get(), sampler_.get()),
         });
         srb_->create();
 
@@ -112,7 +103,7 @@ void RhiWidget::initialize(QRhiCommandBuffer *cb)
 
         auto rub = rhi_->nextResourceUpdateBatch();
         rub->uploadStaticBuffer(vbuf_.get(), vertices);
-        rub->uploadTexture(texture_.get(), cover_);
+        rub->updateDynamicBuffer(ubuf_.get(), 64, 12, light_);
         cb->resourceUpdate(rub);
     }
 }
@@ -126,7 +117,7 @@ void RhiWidget::render(QRhiCommandBuffer *cb)
     model_.rotate(rotation_);
 
     view_.setToIdentity();
-    view_.translate(0, 0, -4.0);
+    view_.translate(0, 0, -6.0);
 
     projection_.setToIdentity();
     projection_.perspective(45.0f, rtsz.width() / (float)rtsz.height(), 0.01f, 1000.0f);
