@@ -1,0 +1,7 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource prefix="/images">
+        <file>container.png</file>
+        <file>container_specular.png</file>
+    </qresource>
+</RCC>

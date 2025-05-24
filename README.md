@@ -14,7 +14,7 @@
 - [x] [tutorial-05](https://learnopengl.com/Lighting/Colors): Colors
 - [x] [tutorial-06](https://learnopengl.com/Lighting/Basic-Lighting): Basic Lighting
 - [x] [tutorial-07](https://learnopengl.com/Lighting/Materials): Materials
-- [ ] [tutorial-08](https://learnopengl.com/Lighting/Lighting-maps): Lighting Maps
+- [x] [tutorial-08](https://learnopengl.com/Lighting/Lighting-maps): Lighting Maps
 - [ ] [tutorial-09](https://learnopengl.com/Lighting/Light-casters): Light Casters
 - [ ] [tutorial-10](https://learnopengl.com/Lighting/Multiple-lights): Multiple Lights
 
