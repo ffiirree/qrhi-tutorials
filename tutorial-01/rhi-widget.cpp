@@ -108,8 +108,7 @@ void RhiWidget::render(QRhiCommandBuffer *cb)
     const auto rub  = rhi_->nextResourceUpdateBatch();
     const auto rtsz = renderTarget()->pixelSize();
 
-    auto background = QColor::fromRgbF(0.0f, 0.0f, 0.0f, 1.0f);
-    cb->beginPass(renderTarget(), background, { 1.0f, 0 }, rub);
+    cb->beginPass(renderTarget(),  Qt::black, { 1.0f, 0 }, rub);
 
     cb->setGraphicsPipeline(pipeline_.get());
     cb->setViewport({ 0, 0, static_cast<float>(rtsz.width()), static_cast<float>(rtsz.height()) });

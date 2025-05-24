@@ -6,47 +6,47 @@
 // clang-format off
 // normalized device coordinates
 static constexpr float vertices[] = {
-    -1.0f, -1.0f, -1.0f,  // -X
-    -1.0f, -1.0f,  1.0f,
-    -1.0f,  1.0f,  1.0f,
-    -1.0f,  1.0f,  1.0f,
-    -1.0f,  1.0f, -1.0f,
-    -1.0f, -1.0f, -1.0f,
+    -1.0f, -1.0f, -1.0f, -1.0f,  0.0f,  0.0f, // -X
+    -1.0f, -1.0f,  1.0f, -1.0f,  0.0f,  0.0f,
+    -1.0f,  1.0f,  1.0f, -1.0f,  0.0f,  0.0f,
+    -1.0f,  1.0f,  1.0f, -1.0f,  0.0f,  0.0f,
+    -1.0f,  1.0f, -1.0f, -1.0f,  0.0f,  0.0f,
+    -1.0f, -1.0f, -1.0f, -1.0f,  0.0f,  0.0f,
 
-    -1.0f, -1.0f, -1.0f,  // -Z
-     1.0f,  1.0f, -1.0f,
-     1.0f, -1.0f, -1.0f,
-    -1.0f, -1.0f, -1.0f,
-    -1.0f,  1.0f, -1.0f,
-     1.0f,  1.0f, -1.0f,
+    -1.0f, -1.0f, -1.0f,  0.0f,  0.0f, -1.0f, // -Z
+     1.0f,  1.0f, -1.0f,  0.0f,  0.0f, -1.0f,
+     1.0f, -1.0f, -1.0f,  0.0f,  0.0f, -1.0f,
+    -1.0f, -1.0f, -1.0f,  0.0f,  0.0f, -1.0f,
+    -1.0f,  1.0f, -1.0f,  0.0f,  0.0f, -1.0f,
+     1.0f,  1.0f, -1.0f,  0.0f,  0.0f, -1.0f,
 
-    -1.0f, -1.0f, -1.0f,  // -Y
-     1.0f, -1.0f, -1.0f,
-     1.0f, -1.0f,  1.0f,
-    -1.0f, -1.0f, -1.0f,
-     1.0f, -1.0f,  1.0f,
-    -1.0f, -1.0f,  1.0f,
+    -1.0f, -1.0f, -1.0f,  0.0f, -1.0f,  0.0f, // -Y
+     1.0f, -1.0f, -1.0f,  0.0f, -1.0f,  0.0f,
+     1.0f, -1.0f,  1.0f,  0.0f, -1.0f,  0.0f,
+    -1.0f, -1.0f, -1.0f,  0.0f, -1.0f,  0.0f,
+     1.0f, -1.0f,  1.0f,  0.0f, -1.0f,  0.0f,
+    -1.0f, -1.0f,  1.0f,  0.0f, -1.0f,  0.0f,
 
-    -1.0f,  1.0f, -1.0f,  // +Y
-    -1.0f,  1.0f,  1.0f,
-     1.0f,  1.0f,  1.0f,
-    -1.0f,  1.0f, -1.0f,
-     1.0f,  1.0f,  1.0f,
-     1.0f,  1.0f, -1.0f,
+    -1.0f,  1.0f, -1.0f,  0.0f,  1.0f,  0.0f, // +Y
+    -1.0f,  1.0f,  1.0f,  0.0f,  1.0f,  0.0f,
+     1.0f,  1.0f,  1.0f,  0.0f,  1.0f,  0.0f,
+    -1.0f,  1.0f, -1.0f,  0.0f,  1.0f,  0.0f,
+     1.0f,  1.0f,  1.0f,  0.0f,  1.0f,  0.0f,
+     1.0f,  1.0f, -1.0f,  0.0f,  1.0f,  0.0f,
 
-     1.0f,  1.0f, -1.0f,  // +X
-     1.0f,  1.0f,  1.0f,
-     1.0f, -1.0f,  1.0f,
-     1.0f, -1.0f,  1.0f,
-     1.0f, -1.0f, -1.0f,
-     1.0f,  1.0f, -1.0f,
+     1.0f,  1.0f, -1.0f,  1.0f,  0.0f,  0.0f, // +X
+     1.0f,  1.0f,  1.0f,  1.0f,  0.0f,  0.0f,
+     1.0f, -1.0f,  1.0f,  1.0f,  0.0f,  0.0f,
+     1.0f, -1.0f,  1.0f,  1.0f,  0.0f,  0.0f,
+     1.0f, -1.0f, -1.0f,  1.0f,  0.0f,  0.0f,
+     1.0f,  1.0f, -1.0f,  1.0f,  0.0f,  0.0f,
 
-    -1.0f,  1.0f,  1.0f,  // +Z
-    -1.0f, -1.0f,  1.0f,
-     1.0f,  1.0f,  1.0f,
-    -1.0f, -1.0f,  1.0f,
-     1.0f, -1.0f,  1.0f,
-     1.0f,  1.0f,  1.0f,
+    -1.0f,  1.0f,  1.0f,  0.0f,  0.0f,  1.0f, // +Z
+    -1.0f, -1.0f,  1.0f,  0.0f,  0.0f,  1.0f,
+     1.0f,  1.0f,  1.0f,  0.0f,  0.0f,  1.0f,
+    -1.0f, -1.0f,  1.0f,  0.0f,  0.0f,  1.0f,
+     1.0f, -1.0f,  1.0f,  0.0f,  0.0f,  1.0f,
+     1.0f,  1.0f,  1.0f,  0.0f,  0.0f,  1.0f,
 };
 // clang-format on
 
@@ -69,14 +69,18 @@ void RhiWidget::initialize(QRhiCommandBuffer *cb)
         vbuf_.reset(rhi_->newBuffer(QRhiBuffer::Immutable, QRhiBuffer::VertexBuffer, sizeof(vertices)));
         vbuf_->create();
 
-        ubuf_.reset(rhi_->newBuffer(QRhiBuffer::Dynamic, QRhiBuffer::UniformBuffer, 64 + 12));
-        ubuf_->create();
+        mvp_buf_.reset(rhi_->newBuffer(QRhiBuffer::Dynamic, QRhiBuffer::UniformBuffer, 64 * 3));
+        mvp_buf_->create();
+
+        light_buf_.reset(rhi_->newBuffer(QRhiBuffer::Dynamic, QRhiBuffer::UniformBuffer, 4 * 4 * 3));
+        light_buf_->create();
 
         srb_.reset(rhi_->newShaderResourceBindings());
         srb_->setBindings({
-            QRhiShaderResourceBinding::uniformBuffer(
-                0, QRhiShaderResourceBinding::VertexStage | QRhiShaderResourceBinding::FragmentStage,
-                ubuf_.get()),
+            QRhiShaderResourceBinding::uniformBuffer(0, QRhiShaderResourceBinding::VertexStage,
+                                                     mvp_buf_.get()),
+            QRhiShaderResourceBinding::uniformBuffer(1, QRhiShaderResourceBinding::FragmentStage,
+                                                     light_buf_.get()),
         });
         srb_->create();
 
@@ -88,9 +92,10 @@ void RhiWidget::initialize(QRhiCommandBuffer *cb)
         });
 
         QRhiVertexInputLayout layout{};
-        layout.setBindings({ 3 * sizeof(float) });
+        layout.setBindings({ 6 * sizeof(float) });
         layout.setAttributes({
             { 0, 0, QRhiVertexInputAttribute::Float3, 0 },
+            { 0, 1, QRhiVertexInputAttribute::Float3, 3 * sizeof(float) },
         });
         pipeline_->setVertexInputLayout(layout);
         pipeline_->setShaderResourceBindings(srb_.get());
@@ -102,7 +107,10 @@ void RhiWidget::initialize(QRhiCommandBuffer *cb)
 
         auto rub = rhi_->nextResourceUpdateBatch();
         rub->uploadStaticBuffer(vbuf_.get(), vertices);
-        rub->updateDynamicBuffer(ubuf_.get(), 64, 12, light_);
+        rub->updateDynamicBuffer(light_buf_.get(), 0, 12, light_.color);
+        rub->updateDynamicBuffer(light_buf_.get(), 16, 12, &light_.position);
+        rub->updateDynamicBuffer(light_buf_.get(), 28, 4, &light_.ambient);
+        rub->updateDynamicBuffer(light_buf_.get(), 32, 12, &camera_pos_);
         cb->resourceUpdate(rub);
     }
 }
@@ -116,12 +124,14 @@ void RhiWidget::render(QRhiCommandBuffer *cb)
     model_.rotate(rotation_);
 
     view_.setToIdentity();
-    view_.translate(0, 0, -6.0);
+    view_.translate(camera_pos_);
 
     projection_.setToIdentity();
     projection_.perspective(45.0f, rtsz.width() / (float)rtsz.height(), 0.01f, 1000.0f);
 
-    rub->updateDynamicBuffer(ubuf_.get(), 0, 64, (projection_ * view_ * model_).constData());
+    rub->updateDynamicBuffer(mvp_buf_.get(), 0, 64, model_.constData());
+    rub->updateDynamicBuffer(mvp_buf_.get(), 64, 64, view_.constData());
+    rub->updateDynamicBuffer(mvp_buf_.get(), 128, 64, projection_.constData());
 
     cb->beginPass(renderTarget(), Qt::black, { 1.0f, 0 }, rub);
 
@@ -131,6 +141,8 @@ void RhiWidget::render(QRhiCommandBuffer *cb)
 
     const QRhiCommandBuffer::VertexInput input{ vbuf_.get(), 0 };
     cb->setVertexInput(0, 1, &input);
+    cb->draw(36);
+
     cb->draw(36);
 
     cb->endPass();

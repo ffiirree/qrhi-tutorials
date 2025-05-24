@@ -41,14 +41,14 @@ void RhiWidget::initialize(QRhiCommandBuffer *cb)
         texture_.reset(rhi_->newTexture(QRhiTexture::RGBA8, cover_.size()));
         texture_->create();
 
-        std::vector<QRhiShaderResourceBinding> bindings{};
-        bindings.emplace_back(QRhiShaderResourceBinding::uniformBuffer(
-            0, QRhiShaderResourceBinding::VertexStage | QRhiShaderResourceBinding::FragmentStage,
-            ubuf_.get()));
-        bindings.emplace_back(QRhiShaderResourceBinding::sampledTexture(
-            1, QRhiShaderResourceBinding::FragmentStage, texture_.get(), sampler_.get()));
         srb_.reset(rhi_->newShaderResourceBindings());
-        srb_->setBindings(bindings.begin(), bindings.end());
+        srb_->setBindings({
+            QRhiShaderResourceBinding::uniformBuffer(
+                0, QRhiShaderResourceBinding::VertexStage | QRhiShaderResourceBinding::FragmentStage,
+                ubuf_.get()),
+            QRhiShaderResourceBinding::sampledTexture(1, QRhiShaderResourceBinding::FragmentStage,
+                                                      texture_.get(), sampler_.get()),
+        });
         srb_->create();
 
         pipeline_.reset(rhi_->newGraphicsPipeline());
@@ -88,8 +88,7 @@ void RhiWidget::render(QRhiCommandBuffer *cb)
     mvp_.scale(scale_x, scale_y);
     rub->updateDynamicBuffer(ubuf_.get(), 0, 64, mvp_.constData());
 
-    auto background = QColor::fromRgbF(0.0f, 0.0f, 0.0f, 1.0f);
-    cb->beginPass(renderTarget(), background, { 1.0f, 0 }, rub);
+    cb->beginPass(renderTarget(), Qt::black, { 1.0f, 0 }, rub);
 
     cb->setGraphicsPipeline(pipeline_.get());
     cb->setViewport({ 0, 0, static_cast<float>(rtsz.width()), static_cast<float>(rtsz.height()) });

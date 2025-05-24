@@ -11,8 +11,8 @@
 
 ### Lighting
 
-- [ ] [tutorial-05](https://learnopengl.com/Lighting/Colors): Colors
-- [ ] [tutorial-06](https://learnopengl.com/Lighting/Basic-Lighting): Basic Lighting
+- [x] [tutorial-05](https://learnopengl.com/Lighting/Colors): Colors
+- [x] [tutorial-06](https://learnopengl.com/Lighting/Basic-Lighting): Basic Lighting
 - [ ] [tutorial-07](https://learnopengl.com/Lighting/Materials): Materials
 
 ### Model Loading
