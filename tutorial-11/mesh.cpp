@@ -33,7 +33,7 @@ void Mesh::create(QRhi *rhi, QRhiRenderTarget *rt)
         ubuf_->create();
 
         sampler_.reset(rhi->newSampler(QRhiSampler::Linear, QRhiSampler::Linear, QRhiSampler::None,
-                                       QRhiSampler::ClampToEdge, QRhiSampler::ClampToEdge));
+                                       QRhiSampler::Repeat, QRhiSampler::Repeat));
         sampler_->create();
 
         std::vector<QRhiShaderResourceBinding> bindings{};

@@ -54,7 +54,7 @@ void RhiWidget::mouseMoveEvent(QMouseEvent *event)
     const auto diff = QVector2D(event->position()) - last_pos_;
     last_pos_       = QVector2D(event->position());
 
-    const auto axis = QVector3D(diff.y() / 2, diff.x() / 2, 0.0).normalized();
+    const auto axis = QVector3D(diff.y() / 4, diff.x() / 4, 0.0).normalized();
     rotation_       = QQuaternion::fromAxisAndAngle(axis, diff.length()) * rotation_;
 
     update();
@@ -64,7 +64,7 @@ void RhiWidget::mouseMoveEvent(QMouseEvent *event)
 
 void RhiWidget::wheelEvent(QWheelEvent *event)
 {
-    camera_pos_ += { 0, 0, event->angleDelta().y() / 12.0f };
+    camera_pos_ *= { 0, 0, event->angleDelta().y() > 0 ? 0.95f : 1.05f };
 
     update();
 
