@@ -25,9 +25,10 @@ void RhiWidget::render(QRhiCommandBuffer *cb)
     const auto rtsz = renderTarget()->pixelSize();
 
     mvp_.setToIdentity();
-    mvp_.perspective(45.0f, rtsz.width() / (float)rtsz.height(), 0.01f, 1000.0f);
-    mvp_.translate(camera_pos_);
+    mvp_.perspective(45.0f, rtsz.width() / (float)rtsz.height(), 0.01f, 3000.0f);
+    mvp_.translate({ 0.0f, 0.0f, -8.0f });
     mvp_.rotate(rotation_);
+    mvp_.scale(scale_);
 
     for (auto& item : items_) {
         item->create(rhi_, renderTarget());
@@ -64,7 +65,7 @@ void RhiWidget::mouseMoveEvent(QMouseEvent *event)
 
 void RhiWidget::wheelEvent(QWheelEvent *event)
 {
-    camera_pos_ *= { 0, 0, event->angleDelta().y() > 0 ? 0.95f : 1.05f };
+    scale_ *= event->angleDelta().y() < 0 ? 0.95f : 1.05f;
 
     update();
 

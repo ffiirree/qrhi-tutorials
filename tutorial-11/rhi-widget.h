@@ -33,7 +33,7 @@ private:
     // mouse
     QVector2D   last_pos_{};
     QQuaternion rotation_{};
-    QVector3D   camera_pos_{ 0.0f, 0.0f, -8.0f };
+    float       scale_{ 1.0f };
 
     std::vector<std::unique_ptr<RenderItem>> items_{};
 };

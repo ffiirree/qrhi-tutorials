@@ -22,7 +22,8 @@ struct Material
 class Mesh : public RenderItem
 {
 public:
-    Mesh(std::vector<Vertex> vertices, std::vector<uint32_t> indices, std::vector<Material> materials);
+    Mesh(std::vector<Vertex> vertices, std::vector<uint32_t> indices, std::vector<Material> materials,
+         aiMatrix4x4 transform);
 
     Mesh(Mesh&&) = default;
 
@@ -44,6 +45,8 @@ private:
     std::unique_ptr<QRhiBuffer>                 ubuf_{};
     std::unique_ptr<QRhiSampler>                sampler_{};
     std::unique_ptr<QRhiShaderResourceBindings> srb_{};
+
+    QMatrix4x4 view_{};
 
     bool uploaded_{};
 };

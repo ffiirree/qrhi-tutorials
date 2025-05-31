@@ -1,4 +1,3 @@
-#include "model.h"
 #include "rhi-widget.h"
 
 #include <QApplication>

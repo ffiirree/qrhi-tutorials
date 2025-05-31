@@ -15,8 +15,8 @@ bool Model::load(const QString& resource)
 
     Assimp::Importer importer{};
     const auto       scene =
-        importer.ReadFile(resource.toStdString(),
-                          aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_CalcTangentSpace);
+        importer.ReadFile(resource.toStdString(), aiProcess_Triangulate | aiProcess_GenSmoothNormals |
+                                                      aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
     if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
         qDebug() << importer.GetErrorString();
         return false;
@@ -25,7 +25,7 @@ bool Model::load(const QString& resource)
     meshes_.clear();
     textures_.clear();
 
-    loadNode(scene, scene->mRootNode);
+    loadNode(scene, scene->mRootNode, {});
 
     created_  = false;
     uploaded_ = false;
@@ -33,8 +33,10 @@ bool Model::load(const QString& resource)
     return true;
 }
 
-bool Model::loadNode(const aiScene *scene, aiNode *node)
+bool Model::loadNode(const aiScene *scene, aiNode *node, aiMatrix4x4 transform)
 {
+    transform = transform * node->mTransformation;
+
     for (uint32_t i = 0; i < node->mNumMeshes; ++i) {
         auto mesh = scene->mMeshes[node->mMeshes[i]];
 
@@ -99,11 +101,11 @@ bool Model::loadNode(const aiScene *scene, aiNode *node)
             textures_[dir_ + "/" + std::string(path.data, path.length)].reset();
         }
 
-        meshes_.emplace_back(std::make_unique<Mesh>(vertices, indices, materials));
+        meshes_.emplace_back(std::make_unique<Mesh>(vertices, indices, materials, transform));
     }
 
     for (uint32_t i = 0; i < node->mNumChildren; ++i) {
-        loadNode(scene, node->mChildren[i]);
+        loadNode(scene, node->mChildren[i], transform);
     }
 
     return true;
