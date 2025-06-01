@@ -24,11 +24,44 @@
 
 ### Advanced OpenGL
 
+- [ ] [tutorial-12](https://learnopengl.com/Advanced-OpenGL/Depth-testing) Depth Testing
+- [ ] [tutorial-13](https://learnopengl.com/Advanced-OpenGL/Stencil-testing) Stencil Testing
+- [ ] [tutorial-14](https://learnopengl.com/Advanced-OpenGL/Blending) Blending
+- [ ] [tutorial-15](https://learnopengl.com/Advanced-OpenGL/Face-culling) Face culling
+- [ ] [tutorial-16](https://learnopengl.com/Advanced-OpenGL/Framebuffers) Framebuffers
+- [ ] [tutorial-17](https://learnopengl.com/Advanced-OpenGL/Cubemaps) Cubemaps
+- [ ] [tutorial-18](https://learnopengl.com/Advanced-OpenGL/Advanced-Data) Advanced Data
+- [ ] [tutorial-19](https://learnopengl.com/Advanced-OpenGL/Advanced-GLSL) Advanced GLSL
+- [ ] [tutorial-20](https://learnopengl.com/Advanced-OpenGL/Geometry-Shader) Geometry Shader
+- [ ] [tutorial-21](https://learnopengl.com/Advanced-OpenGL/Instancing) Instancing
+- [ ] [tutorial-22](https://learnopengl.com/Advanced-OpenGL/Anti-Aliasing) Anti-Aliasing
+- [ ] [tutorial-23](https://learnopengl.com/Guest-Articles/2020/OIT/Weighted-Blended) Weighted Blended
+
 ### Advanced Lighting
+
+- [ ] [tutorial-24](https://learnopengl.com/Advanced-Lighting/Advanced-Lighting) Advanced Lighting
+- [ ] [tutorial-25](https://learnopengl.com/Advanced-Lighting/Gamma-Correction) Gamma Correction
+- [ ] [tutorial-26](https://learnopengl.com/Advanced-Lighting/Shadows/Shadow-Mapping) Shadow Mapping
+- [ ] [tutorial-27](https://learnopengl.com/Advanced-Lighting/Shadows/Point-Shadows) Point Shadows
+- [ ] [tutorial-28](https://learnopengl.com/Advanced-Lighting/Normal-Mapping) Normal Mapping
+- [ ] [tutorial-29](https://learnopengl.com/Advanced-Lighting/Parallax-Mapping) Parallax Mapping
+- [ ] [tutorial-30](https://learnopengl.com/Advanced-Lighting/HDR) HDR
+- [ ] [tutorial-31](https://learnopengl.com/Advanced-Lighting/Bloom) Bloom
+- [ ] [tutorial-32](https://learnopengl.com/Advanced-Lighting/Deferred-Shading) Deferred Shading
+- [ ] [tutorial-33](https://learnopengl.com/Advanced-Lighting/SSAO) SSAO
+- [ ] [tutorial-34](https://learnopengl.com/Guest-Articles/2021/CSM) Cascaded Shadow Mapping
+- [ ] [tutorial-35](https://learnopengl.com/Guest-Articles/2022/Phys.-Based-Bloom) Phys. Based Bloom
+- [ ] [tutorial-36](https://learnopengl.com/Guest-Articles/2022/Area-Lights) Area Lights
 
 ### PBR
 
+- [ ] [tutorial-37](https://learnopengl.com/PBR/Lighting) Lighting
+- [ ] [tutorial-38](https://learnopengl.com/PBR/IBL/Diffuse-irradiance) Diffuse Irradiance
+- [ ] [tutorial-39](https://learnopengl.com/PBR/IBL/Specular-IBL) Specular IBL
+
 ### Animation
+
+- [ ] [tutorial-40](https://learnopengl.com/Guest-Articles/2020/Skeletal-Animation) Skeletal Animation
 
 ## Usage
 
