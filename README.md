@@ -7,7 +7,7 @@
 - [x] [tutorial-01](https://learnopengl.com/Getting-started/Hello-Triangle): Hello Triangle
 - [x] [tutorial-02](https://learnopengl.com/Getting-started/Textures): Textures
 - [x] [tutorial-03](https://learnopengl.com/Getting-started/Coordinate-Systems): Coordinate Systems
-- [ ] [tutorial-04](https://learnopengl.com/Getting-started/Camera): Camera
+- [x] [tutorial-04](https://learnopengl.com/Getting-started/Camera): Camera
 
 ### Lighting
 
@@ -21,6 +21,14 @@
 ### Model Loading
 
 - [x] [tutorial-11](https://learnopengl.com/Model-Loading/Assimp): Loading
+
+### Advanced OpenGL
+
+### Advanced Lighting
+
+### PBR
+
+### Animation
 
 ## Usage
 
