@@ -179,9 +179,6 @@ void RhiWidget::render(QRhiCommandBuffer *cb)
     const QRhiCommandBuffer::VertexInput input{ vbuf_.get(), 0 };
     cb->setVertexInput(0, 1, &input);
     cb->draw(36);
-
-    cb->draw(36);
-
     cb->endPass();
 }
 

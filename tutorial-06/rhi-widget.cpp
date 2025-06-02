@@ -143,8 +143,6 @@ void RhiWidget::render(QRhiCommandBuffer *cb)
     cb->setVertexInput(0, 1, &input);
     cb->draw(36);
 
-    cb->draw(36);
-
     cb->endPass();
 }
 

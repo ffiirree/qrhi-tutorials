@@ -6,47 +6,13 @@
 // clang-format off
 // normalized device coordinates
 static constexpr float vertices[] = {
-    -1.0f, -1.0f, -1.0f, -1.0f,  0.0f,  0.0f, // -X
-    -1.0f, -1.0f,  1.0f, -1.0f,  0.0f,  0.0f,
-    -1.0f,  1.0f,  1.0f, -1.0f,  0.0f,  0.0f,
-    -1.0f,  1.0f,  1.0f, -1.0f,  0.0f,  0.0f,
-    -1.0f,  1.0f, -1.0f, -1.0f,  0.0f,  0.0f,
-    -1.0f, -1.0f, -1.0f, -1.0f,  0.0f,  0.0f,
+     10.0f, -0.5f,  10.0f,  0.0f, 1.0f, 0.0f,  10.0f,  0.0f,
+    -10.0f, -0.5f,  10.0f,  0.0f, 1.0f, 0.0f,   0.0f,  0.0f,
+    -10.0f, -0.5f, -10.0f,  0.0f, 1.0f, 0.0f,   0.0f, 10.0f,
 
-    -1.0f, -1.0f, -1.0f,  0.0f,  0.0f, -1.0f, // -Z
-     1.0f,  1.0f, -1.0f,  0.0f,  0.0f, -1.0f,
-     1.0f, -1.0f, -1.0f,  0.0f,  0.0f, -1.0f,
-    -1.0f, -1.0f, -1.0f,  0.0f,  0.0f, -1.0f,
-    -1.0f,  1.0f, -1.0f,  0.0f,  0.0f, -1.0f,
-     1.0f,  1.0f, -1.0f,  0.0f,  0.0f, -1.0f,
-
-    -1.0f, -1.0f, -1.0f,  0.0f, -1.0f,  0.0f, // -Y
-     1.0f, -1.0f, -1.0f,  0.0f, -1.0f,  0.0f,
-     1.0f, -1.0f,  1.0f,  0.0f, -1.0f,  0.0f,
-    -1.0f, -1.0f, -1.0f,  0.0f, -1.0f,  0.0f,
-     1.0f, -1.0f,  1.0f,  0.0f, -1.0f,  0.0f,
-    -1.0f, -1.0f,  1.0f,  0.0f, -1.0f,  0.0f,
-
-    -1.0f,  1.0f, -1.0f,  0.0f,  1.0f,  0.0f, // +Y
-    -1.0f,  1.0f,  1.0f,  0.0f,  1.0f,  0.0f,
-     1.0f,  1.0f,  1.0f,  0.0f,  1.0f,  0.0f,
-    -1.0f,  1.0f, -1.0f,  0.0f,  1.0f,  0.0f,
-     1.0f,  1.0f,  1.0f,  0.0f,  1.0f,  0.0f,
-     1.0f,  1.0f, -1.0f,  0.0f,  1.0f,  0.0f,
-
-     1.0f,  1.0f, -1.0f,  1.0f,  0.0f,  0.0f, // +X
-     1.0f,  1.0f,  1.0f,  1.0f,  0.0f,  0.0f,
-     1.0f, -1.0f,  1.0f,  1.0f,  0.0f,  0.0f,
-     1.0f, -1.0f,  1.0f,  1.0f,  0.0f,  0.0f,
-     1.0f, -1.0f, -1.0f,  1.0f,  0.0f,  0.0f,
-     1.0f,  1.0f, -1.0f,  1.0f,  0.0f,  0.0f,
-
-    -1.0f,  1.0f,  1.0f,  0.0f,  0.0f,  1.0f, // +Z
-    -1.0f, -1.0f,  1.0f,  0.0f,  0.0f,  1.0f,
-     1.0f,  1.0f,  1.0f,  0.0f,  0.0f,  1.0f,
-    -1.0f, -1.0f,  1.0f,  0.0f,  0.0f,  1.0f,
-     1.0f, -1.0f,  1.0f,  0.0f,  0.0f,  1.0f,
-     1.0f,  1.0f,  1.0f,  0.0f,  0.0f,  1.0f,
+     10.0f, -0.5f,  10.0f,  0.0f, 1.0f, 0.0f,  10.0f,  0.0f,
+    -10.0f, -0.5f, -10.0f,  0.0f, 1.0f, 0.0f,   0.0f, 10.0f,
+     10.0f, -0.5f, -10.0f,  0.0f, 1.0f, 0.0f,  10.0f, 10.0f
 };
 // clang-format on
 
@@ -56,7 +22,10 @@ QShader LoadShader(const QString& name)
     return f.open(QIODevice::ReadOnly) ? QShader::fromSerialized(f.readAll()) : QShader();
 }
 
-RhiWidget::RhiWidget() { setSampleCount(4); }
+RhiWidget::RhiWidget()
+{
+    wood_.load(":/images/wood.png");
+}
 
 void RhiWidget::initialize(QRhiCommandBuffer *cb)
 {
@@ -75,11 +44,18 @@ void RhiWidget::initialize(QRhiCommandBuffer *cb)
         light_buf_.reset(rhi_->newBuffer(QRhiBuffer::Dynamic, QRhiBuffer::UniformBuffer, 4 * 4 * 4));
         light_buf_->create();
 
-        material_buf_.reset(rhi_->newBuffer(QRhiBuffer::Dynamic, QRhiBuffer::UniformBuffer, 4 * 4 * 3));
+        material_buf_.reset(rhi_->newBuffer(QRhiBuffer::Dynamic, QRhiBuffer::UniformBuffer, 16));
         material_buf_->create();
 
         camera_buf_.reset(rhi_->newBuffer(QRhiBuffer::Dynamic, QRhiBuffer::UniformBuffer, 4 * 4));
         camera_buf_->create();
+
+        sampler_.reset(rhi_->newSampler(QRhiSampler::Linear, QRhiSampler::Linear, QRhiSampler::None,
+                                        QRhiSampler::Repeat, QRhiSampler::Repeat));
+        sampler_->create();
+
+        wood_texture_.reset(rhi_->newTexture(QRhiTexture::RGBA8, wood_.size()));
+        wood_texture_->create();
 
         srb_.reset(rhi_->newShaderResourceBindings());
         srb_->setBindings({
@@ -91,6 +67,8 @@ void RhiWidget::initialize(QRhiCommandBuffer *cb)
                                                      material_buf_.get()),
             QRhiShaderResourceBinding::uniformBuffer(3, QRhiShaderResourceBinding::FragmentStage,
                                                      camera_buf_.get()),
+            QRhiShaderResourceBinding::sampledTexture(4, QRhiShaderResourceBinding::FragmentStage,
+                                                      wood_texture_.get(), sampler_.get()),
         });
         srb_->create();
 
@@ -102,17 +80,18 @@ void RhiWidget::initialize(QRhiCommandBuffer *cb)
         });
 
         QRhiVertexInputLayout layout{};
-        layout.setBindings({ 6 * sizeof(float) });
+        layout.setBindings({ 8 * sizeof(float) });
         layout.setAttributes({
             { 0, 0, QRhiVertexInputAttribute::Float3, 0 },
             { 0, 1, QRhiVertexInputAttribute::Float3, 3 * sizeof(float) },
+            { 0, 2, QRhiVertexInputAttribute::Float2, 6 * sizeof(float) },
         });
         pipeline_->setVertexInputLayout(layout);
         pipeline_->setShaderResourceBindings(srb_.get());
         pipeline_->setRenderPassDescriptor(renderTarget()->renderPassDescriptor());
-        pipeline_->setDepthTest(true);
-        pipeline_->setDepthWrite(true);
-        pipeline_->setCullMode(QRhiGraphicsPipeline::Back);
+//        pipeline_->setDepthTest(true);
+//        pipeline_->setDepthWrite(true);
+//        pipeline_->setCullMode(QRhiGraphicsPipeline::Back);
         pipeline_->create();
 
         auto rub = rhi_->nextResourceUpdateBatch();
@@ -122,12 +101,12 @@ void RhiWidget::initialize(QRhiCommandBuffer *cb)
         rub->updateDynamicBuffer(light_buf_.get(), 32, 12, light_.diffuse);
         rub->updateDynamicBuffer(light_buf_.get(), 48, 12, light_.specular);
 
-        rub->updateDynamicBuffer(material_buf_.get(), 0, 12, material_.ambient);
-        rub->updateDynamicBuffer(material_buf_.get(), 16, 12, material_.diffuse);
-        rub->updateDynamicBuffer(material_buf_.get(), 32, 12, material_.specular);
-        rub->updateDynamicBuffer(material_buf_.get(), 44, 4, &material_.shininess);
+        rub->updateDynamicBuffer(material_buf_.get(), 0, 12, material_.specular);
+        rub->updateDynamicBuffer(material_buf_.get(), 12, 4, &material_.shininess);
 
         rub->updateDynamicBuffer(camera_buf_.get(), 0, 12, &camera_pos_);
+
+        rub->uploadTexture(wood_texture_.get(), wood_);
         cb->resourceUpdate(rub);
     }
 }
@@ -144,7 +123,7 @@ void RhiWidget::render(QRhiCommandBuffer *cb)
     view_.translate(camera_pos_);
 
     projection_.setToIdentity();
-    projection_.perspective(45.0f, rtsz.width() / (float)rtsz.height(), 0.01f, 1000.0f);
+    projection_.perspective(45.0f, rtsz.width() / (float)rtsz.height(), 0.1f, 100.0f);
 
     rub->updateDynamicBuffer(mvp_buf_.get(), 0, 64, model_.constData());
     rub->updateDynamicBuffer(mvp_buf_.get(), 64, 64, view_.constData());
@@ -158,7 +137,7 @@ void RhiWidget::render(QRhiCommandBuffer *cb)
 
     const QRhiCommandBuffer::VertexInput input{ vbuf_.get(), 0 };
     cb->setVertexInput(0, 1, &input);
-    cb->draw(36);
+    cb->draw(6);
 
     cb->endPass();
 }

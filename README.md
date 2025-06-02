@@ -39,7 +39,7 @@
 
 ### Advanced Lighting
 
-- [ ] [tutorial-24](https://learnopengl.com/Advanced-Lighting/Advanced-Lighting) Advanced Lighting
+- [x] [tutorial-24](https://learnopengl.com/Advanced-Lighting/Advanced-Lighting) Advanced Lighting
 - [ ] [tutorial-25](https://learnopengl.com/Advanced-Lighting/Gamma-Correction) Gamma Correction
 - [ ] [tutorial-26](https://learnopengl.com/Advanced-Lighting/Shadows/Shadow-Mapping) Shadow Mapping
 - [ ] [tutorial-27](https://learnopengl.com/Advanced-Lighting/Shadows/Point-Shadows) Point Shadows
