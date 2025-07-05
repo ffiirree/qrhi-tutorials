@@ -89,7 +89,7 @@ void RhiWidget::initialize(QRhiCommandBuffer *cb)
         pipeline_->setVertexInputLayout(layout);
         pipeline_->setShaderResourceBindings(srb_.get());
         pipeline_->setRenderPassDescriptor(renderTarget()->renderPassDescriptor());
-//        pipeline_->setDepthTest(true);
+        pipeline_->setDepthTest(true);
 //        pipeline_->setDepthWrite(true);
 //        pipeline_->setCullMode(QRhiGraphicsPipeline::Back);
         pipeline_->create();
