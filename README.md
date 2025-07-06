@@ -1,5 +1,7 @@
 # QRhi Tutorials
 
+Tutorials for [Learn OpenGL](https://learnopengl.com/) by QRhi.
+
 ## Tutorials
 
 ### Getting Started
@@ -61,7 +63,7 @@
 
 ### Animation
 
-- [ ] [tutorial-40](https://learnopengl.com/Guest-Articles/2020/Skeletal-Animation) Skeletal Animation
+- [x] [tutorial-40](https://learnopengl.com/Guest-Articles/2020/Skeletal-Animation) Skeletal Animation
 
 ## Usage
 

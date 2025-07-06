@@ -31,7 +31,7 @@ void Mesh::create(QRhi *rhi, QRhiRenderTarget *rt)
                                    static_cast<quint32>(indices.size() * sizeof(uint32_t))));
         ibuf_->create();
 
-        ubuf_.reset(rhi->newBuffer(QRhiBuffer::Dynamic, QRhiBuffer::UniformBuffer, 64));
+        ubuf_.reset(rhi->newBuffer(QRhiBuffer::Dynamic, QRhiBuffer::UniformBuffer, 64 + 64 * 500));
         ubuf_->create();
 
         sampler_.reset(rhi->newSampler(QRhiSampler::Linear, QRhiSampler::Linear, QRhiSampler::None,
@@ -60,11 +60,13 @@ void Mesh::create(QRhi *rhi, QRhiRenderTarget *rt)
         });
 
         QRhiVertexInputLayout layout{};
-        layout.setBindings({ 8 * sizeof(float) });
+        layout.setBindings({ 12 * sizeof(float) + 4 * sizeof(int) });
         layout.setAttributes({
             { 0, 0, QRhiVertexInputAttribute::Float3, 0 },
             { 0, 1, QRhiVertexInputAttribute::Float3, 3 * sizeof(float) },
             { 0, 2, QRhiVertexInputAttribute::Float2, 6 * sizeof(float) },
+            { 0, 3, QRhiVertexInputAttribute::SInt4, 8 * sizeof(float) },
+            { 0, 4, QRhiVertexInputAttribute::Float4, 8 * sizeof(float) + 4 * sizeof(int) },
         });
         pipeline_->setVertexInputLayout(layout);
         pipeline_->setShaderResourceBindings(srb_.get());
@@ -77,7 +79,7 @@ void Mesh::create(QRhi *rhi, QRhiRenderTarget *rt)
     }
 }
 
-void Mesh::upload(QRhiResourceUpdateBatch *rub, const QMatrix4x4& mvp)
+void Mesh::upload(QRhiResourceUpdateBatch *rub, const QMatrix4x4& mvp, const std::vector<QMatrix4x4>& bm)
 {
     if (!uploaded_) {
         rub->uploadStaticBuffer(vbuf_.get(), vertices.data());
@@ -85,7 +87,10 @@ void Mesh::upload(QRhiResourceUpdateBatch *rub, const QMatrix4x4& mvp)
         uploaded_ = true;
     }
 
-    rub->updateDynamicBuffer(ubuf_.get(), 0, 64, (mvp * transform_).constData());
+    rub->updateDynamicBuffer(ubuf_.get(), 0, 64, mvp.constData());
+    for (unsigned int i = 0; i < bm.size() && i < 500; ++i) {
+        rub->updateDynamicBuffer(ubuf_.get(), 64 * (i + 1), 64, bm[i].constData());
+    }
 }
 
 void Mesh::draw(QRhiCommandBuffer *cb, const QRhiViewport& viewport)

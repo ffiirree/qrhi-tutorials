@@ -45,7 +45,7 @@ private:
     {
         float color[3]{ 1.0f, 1.0f, 1.0f };
         QVector3D position{ 0.0f, 4.0f, 0.0f };
-        float ambient{ 0.1 };
+        float ambient{ 0.1f };
     } light_{};
 };
 

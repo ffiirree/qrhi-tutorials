@@ -19,21 +19,36 @@ void RhiWidget::initialize(QRhiCommandBuffer *)
     }
 }
 
+inline auto ns()
+{
+    using namespace std::chrono;
+    return duration_cast<nanoseconds>(steady_clock::now().time_since_epoch());
+}
+
 void RhiWidget::render(QRhiCommandBuffer *cb)
 {
+    const auto ts = ns().count() / 1000000000.0;
+    if (last_ts_ == 0.0) last_ts_ = ts;
+
     const auto rub  = rhi_->nextResourceUpdateBatch();
     const auto rtsz = renderTarget()->pixelSize();
 
     mvp_.setToIdentity();
     mvp_.perspective(45.0f, rtsz.width() / (float)rtsz.height(), 0.01f, 3000.0f);
-    mvp_.translate({ 0.0f, 0.0f, -8.0f });
+    mvp_.translate({ 0.0f, -2.25f, -8.0f });
     mvp_.rotate(rotation_);
     mvp_.scale(scale_);
 
     for (auto& item : items_) {
+
+        animators_[0]->update(ts - last_ts_);
+        const auto transforms = animators_[0]->bone_matrices();
+
         item->create(rhi_, renderTarget());
-        item->upload(rub, mvp_);
+        item->upload(rub, mvp_, transforms);
     }
+
+    last_ts_ = ts;
 
     cb->beginPass(renderTarget(), Qt::black, { 1.0f, 0 }, rub);
 
@@ -42,6 +57,22 @@ void RhiWidget::render(QRhiCommandBuffer *cb)
     }
 
     cb->endPass();
+
+    update();
+}
+
+void RhiWidget::load(const QString& path)
+{
+    items_.clear();
+    animations_.clear();
+    animators_.clear();
+
+    items_.emplace_back(std::make_unique<Model>(path));
+    animations_.emplace_back(
+        std::make_unique<Animation>(path.toStdString(), dynamic_cast<Model *>(items_.back().get())));
+
+    animators_.emplace_back(std::make_unique<Animator>(animations_.back().get()));
+    update();
 }
 
 void RhiWidget::mousePressEvent(QMouseEvent *event)
@@ -86,10 +117,15 @@ void RhiWidget::dragEnterEvent(QDragEnterEvent *event)
 void RhiWidget::dropEvent(QDropEvent *event)
 {
     items_.clear();
+    animations_.clear();
+    animators_.clear();
 
-    const auto mimedata = event->mimeData();
-    for (auto& url : mimedata->urls()) {
+    for (const auto mimedata = event->mimeData(); auto& url : mimedata->urls()) {
         items_.emplace_back(std::make_unique<Model>(url.toLocalFile()));
+        animations_.emplace_back(std::make_unique<Animation>(url.toLocalFile().toStdString(),
+                                                             dynamic_cast<Model *>(items_.back().get())));
+
+        animators_.emplace_back(std::make_unique<Animator>(animations_.back().get()));
     }
 
     update();
