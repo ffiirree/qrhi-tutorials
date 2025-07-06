@@ -14,7 +14,8 @@ public:
 
     bool load(const QString& resource);
 
-    bool loadNode(const aiScene *scene, aiNode *node, aiMatrix4x4);
+    void load_node(const aiScene *scene, const aiNode *node, const QMatrix4x4& accumulated_transform);
+    void load_mesh(const aiScene *scene, const aiMesh *mesh, QMatrix4x4 accumulated_transform);
 
     void create(QRhi *rhi, QRhiRenderTarget *rt) override;
     void upload(QRhiResourceUpdateBatch *rub, const QMatrix4x4& mvp) override;

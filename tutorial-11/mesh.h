@@ -7,9 +7,9 @@
 
 struct Vertex
 {
-    float position[3]{};
-    float normal[3]{};
-    float coord[2]{};
+    QVector3D position{};
+    QVector3D normal{};
+    QVector2D coords{};
 };
 
 struct Material
@@ -23,7 +23,7 @@ class Mesh : public RenderItem
 {
 public:
     Mesh(std::vector<Vertex> vertices, std::vector<uint32_t> indices, std::vector<Material> materials,
-         aiMatrix4x4 transform);
+         QMatrix4x4 transform);
 
     Mesh(Mesh&&) = default;
 
@@ -46,7 +46,7 @@ private:
     std::unique_ptr<QRhiSampler>                sampler_{};
     std::unique_ptr<QRhiShaderResourceBindings> srb_{};
 
-    QMatrix4x4 view_{};
+    QMatrix4x4 transform_{};
 
     bool uploaded_{};
 };

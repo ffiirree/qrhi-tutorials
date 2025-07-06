@@ -10,13 +10,10 @@ static QShader LoadShader(const QString& name)
 }
 
 Mesh::Mesh(std::vector<Vertex> vertices, std::vector<uint32_t> indices, std::vector<Material> materials,
-           aiMatrix4x4 transform)
-    : vertices(std::move(vertices)), indices(std::move(indices)), materials(std::move(materials))
-{
-    view_ = QMatrix4x4(transform.a1, transform.a2, transform.a3, transform.a4, transform.b1, transform.b2,
-                       transform.b3, transform.b4, transform.c1, transform.c2, transform.c3, transform.c4,
-                       transform.d1, transform.d2, transform.d3, transform.d4);
-}
+           QMatrix4x4 transform)
+    : vertices(std::move(vertices)), indices(std::move(indices)), materials(std::move(materials)),
+      transform_(transform)
+{}
 
 void Mesh::create(QRhi *rhi, QRhiRenderTarget *rt)
 {
@@ -88,7 +85,7 @@ void Mesh::upload(QRhiResourceUpdateBatch *rub, const QMatrix4x4& mvp)
         uploaded_ = true;
     }
 
-    rub->updateDynamicBuffer(ubuf_.get(), 0, 64, (mvp * view_).constData());
+    rub->updateDynamicBuffer(ubuf_.get(), 0, 64, (mvp * transform_).constData());
 }
 
 void Mesh::draw(QRhiCommandBuffer *cb, const QRhiViewport& viewport)
