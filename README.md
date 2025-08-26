@@ -35,7 +35,7 @@ Tutorials for [Learn OpenGL](https://learnopengl.com/) by QRhi.
 - [ ] [tutorial-18](https://learnopengl.com/Advanced-OpenGL/Advanced-Data) Advanced Data
 - [ ] [tutorial-19](https://learnopengl.com/Advanced-OpenGL/Advanced-GLSL) Advanced GLSL
 - [ ] [tutorial-20](https://learnopengl.com/Advanced-OpenGL/Geometry-Shader) Geometry Shader
-- [ ] [tutorial-21](https://learnopengl.com/Advanced-OpenGL/Instancing) Instancing
+- [x] [tutorial-21](https://learnopengl.com/Advanced-OpenGL/Instancing) Instancing
 - [ ] [tutorial-22](https://learnopengl.com/Advanced-OpenGL/Anti-Aliasing) Anti-Aliasing
 - [ ] [tutorial-23](https://learnopengl.com/Guest-Articles/2020/OIT/Weighted-Blended) Weighted Blended
 
